@@ -1,4 +1,4 @@
-# ElectrizShop PWA
+# TechNovaShop PWA
 
 Лабораторная работа №4: PWA-интернет-магазин электроники на Laravel REST API и Vue.
 

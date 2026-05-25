@@ -1,4 +1,4 @@
-const CACHE_NAME = 'electrizshop-v1';
+const CACHE_NAME = 'technovashop-v1';
 const STATIC_ASSETS = ['/', '/manifest.webmanifest', '/icons/icon-192.svg', '/icons/icon-512.svg'];
 
 self.addEventListener('install', (event) => {
@@ -27,7 +27,7 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  const data = event.data ? event.data.json() : { title: 'ElectrizShop', body: 'Новое уведомление магазина' };
+  const data = event.data ? event.data.json() : { title: 'TechNovaShop', body: 'Новое уведомление магазина' };
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,

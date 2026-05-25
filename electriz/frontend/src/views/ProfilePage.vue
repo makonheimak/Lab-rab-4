@@ -109,7 +109,7 @@ async function quickRegister() {
   error.value = '';
   try {
     await store.dispatch('register', {
-      name: 'Покупатель ElectrizShop',
+      name: 'Покупатель TechNovaShop',
       email: `demo${Date.now()}@example.com`,
       password: 'password',
     });

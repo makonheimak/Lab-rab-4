@@ -41,7 +41,7 @@ async function notify() {
   if (!('Notification' in window)) return;
   const permission = await Notification.requestPermission();
   if (permission === 'granted') {
-    new Notification('ElectrizShop', {
+    new Notification('TechNovaShop', {
       body: 'Push-уведомления в PWA работают',
       icon: '/icons/icon-192.svg',
     });

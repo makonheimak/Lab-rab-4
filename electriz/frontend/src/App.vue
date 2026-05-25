@@ -3,7 +3,7 @@
     <header v-if="$route.name !== 'desktop'" class="topbar">
       <router-link to="/" class="brand">
         <span class="brand-icon">E</span>
-        <span>ElectrizShop</span>
+        <span>TechNovaShop</span>
       </router-link>
       <router-link to="/cart" class="cart-pill">Корзина: {{ cartCount }}</router-link>
     </header>

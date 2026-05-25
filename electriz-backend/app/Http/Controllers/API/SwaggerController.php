@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 /**
  * @OA\Info(
- *   title="ElectrizShop API",
+ *   title="TechNovaShop API",
  *   version="1.0.0",
  *   description="REST API для PWA интернет-магазина электроники"
  * )

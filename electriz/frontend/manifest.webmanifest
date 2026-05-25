@@ -1,6 +1,6 @@
 {
-  "name": "ElectrizShop",
-  "short_name": "Electriz",
+  "name": "TechNovaShop",
+  "short_name": "TechNova",
   "description": "PWA интернет-магазин электроники",
   "start_url": "/",
   "display": "standalone",

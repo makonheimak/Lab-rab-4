@@ -39,11 +39,11 @@ class PaymentController extends Controller
         $payment = PaymentHistory::where('user_id', $request->user()->id)->with('order.items.product')->findOrFail($id);
         $lines = [
             '%PDF-1.4',
-            'ElectrizShop payment receipt',
+            'TechNovaShop payment receipt',
             'Receipt: ' . $payment->receipt_number,
             'Amount: ' . $payment->amount . ' ' . $payment->currency,
             'Provider: Stripe sandbox demo',
-            'Company: ElectrizShop',
+            'Company: TechNovaShop',
             'Status: ' . $payment->status,
             '%%EOF',
         ];
