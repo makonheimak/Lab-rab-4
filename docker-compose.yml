@@ -1,0 +1,77 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: lab4-electriz-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: electriz_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - lab4_electriz_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build:
+      context: ./electriz-backend
+    container_name: lab4-electriz-backend
+    working_dir: /app
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./electriz-backend:/app
+    environment:
+      APP_NAME: ElectrizShop
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      FRONTEND_URL: http://localhost:3000
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: electriz_db
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      SANCTUM_STATEFUL_DOMAINS: localhost:3000
+      L5_SWAGGER_GENERATE_ALWAYS: "true"
+    command: >
+      sh -lc "
+        composer install &&
+        cp env.example .env &&
+        sed -i 's/DB_HOST=127.0.0.1/DB_HOST=db/' .env &&
+        sed -i 's/DB_PASSWORD=/DB_PASSWORD=root/' .env &&
+        sed -i 's/DB_DATABASE=electriz_db/DB_DATABASE=electriz_db/' .env &&
+        php artisan key:generate --force &&
+        php artisan migrate --seed --force &&
+        php artisan serve --host=0.0.0.0 --port=8000
+      "
+
+  frontend:
+    image: node:20-alpine
+    container_name: lab4-electriz-frontend
+    working_dir: /app
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./electriz/frontend:/app
+      - lab4_electriz_node_modules:/app/node_modules
+    environment:
+      VITE_API_URL: http://localhost:8000/api
+    command: sh -lc "npm install --legacy-peer-deps && npm run dev"
+
+volumes:
+  lab4_electriz_db:
+  lab4_electriz_node_modules:
