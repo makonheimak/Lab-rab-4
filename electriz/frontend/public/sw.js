@@ -1,4 +1,4 @@
-const CACHE_NAME = 'technovashop-v1';
+const CACHE_NAME = 'technovashop-v2';
 const STATIC_ASSETS = ['/', '/manifest.webmanifest', '/icons/icon-192.svg', '/icons/icon-512.svg'];
 
 self.addEventListener('install', (event) => {
